@@ -115,7 +115,7 @@ apt-get install -y vim-tiny screen
 # js packages, as long as we're not told to skip them
 if [[ $1 != "nojs" ]]; then
   # config the CouchDB repo & install the JS packages
-  echo "deb https://apache.bintray.com/couchdb-deb ${VERSION} main" | \
+  echo "deb https://dl.bintray.com/couchdbtest/couchdb-deb ${VERSION} main" | \
       sudo tee /etc/apt/sources.list.d/couchdb.list
   for server in $(shuf -e pgpkeys.mit.edu \
                           ha.pool.sks-keyservers.net \

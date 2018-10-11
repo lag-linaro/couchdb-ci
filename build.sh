@@ -143,7 +143,7 @@ upload-js() {
         --header "X-Bintray-Override: 1" \
         --header "X-Bintray-Explode: 0" \
         "${HEADERS[@]}" \
-        "${BINTRAY_API}/content/apache/${repo}/${relpath}")"
+        "${BINTRAY_API}/content/couchdbtest/${repo}/${relpath}")"
     if [[ ${ret} == '{"message":"success"}' ]]; then
       echo "Uploaded ${pkg} successfully."
     else
