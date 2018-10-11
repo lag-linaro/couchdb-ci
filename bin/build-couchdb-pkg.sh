@@ -43,6 +43,9 @@ else
   git clone https://github.com/apache/couchdb
   cd couchdb
   ./configure -c
+  mv bin/rebar bin/rebar-orig
+  wget https://github.com/rebar/rebar/wiki/rebar -O bin/rebar
+  chmod +x bin/rebar
   make dist
   cd ..
 fi
