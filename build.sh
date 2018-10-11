@@ -51,7 +51,7 @@ build-base-platform() {
       --build-arg erlang=noerlang \
       --build-arg nodeversion=${NODEVERSION} \
       --build-arg erlangversion=${ERLANGVERSION} \
-      --tag couchdbdev/$1-base \
+      --tag laglinaro/$1-base \
       ${SCRIPTPATH}
 }
 
@@ -63,7 +63,7 @@ build-js() {
   docker run \
       --mount type=bind,src=${SCRIPTPATH}/js/$1,dst=/root/output \
       --mount type=bind,src=${SCRIPTPATH},dst=/root/couchdb-ci \
-      couchdbdev/$1-base \
+      laglinaro/$1-base \
       sudo /root/couchdb-ci/bin/build-js.sh
 }
 
@@ -81,12 +81,12 @@ build-platform() {
   docker build -f dockerfiles/$1 \
       --build-arg nodeversion=${NODEVERSION} \
       --build-arg erlangversion=${ERLANGVERSION} \
-      --tag couchdbdev/$1-erlang-${ERLANGVERSION} \
+      --tag laglinaro/$1-erlang-${ERLANGVERSION} \
       ${SCRIPTPATH}
 }
 
 clean() {
-  docker rmi couchdbdev/$1 -f || true
+  docker rmi laglinaro/$1 -f || true
 }
 
 clean-all() {
@@ -160,13 +160,13 @@ upload-platform() {
     echo "  docker login"
     exit 1
   fi
-  docker push couchdbdev/$1-erlang-${ERLANGVERSION}
+  docker push laglinaro/$1-erlang-${ERLANGVERSION}
 }
 
 build-test-couch() {
   docker run \
       --mount type=bind,src=${SCRIPTPATH},dst=/home/jenkins/couchdb-ci \
-      couchdbdev/$1-erlang-${ERLANGVERSION} \
+      laglinaro/$1-erlang-${ERLANGVERSION} \
       /home/jenkins/couchdb-ci/bin/build-test-couchdb.sh $2
 }
 
@@ -184,7 +184,7 @@ build-package() {
   docker run \
       --mount type=bind,src=${SCRIPTPATH},dst=/home/jenkins/couchdb-ci \
       --mount type=bind,src=${SCRIPTPATH}/../couchdb-pkg,dst=/home/jenkins/couchdb-pkg \
-      couchdbdev/$1-erlang-${ERLANGVERSION} \
+      laglinaro/$1-erlang-${ERLANGVERSION} \
       /home/jenkins/couchdb-ci/bin/build-couchdb-pkg.sh ${2##*/}
 }
 
@@ -316,9 +316,9 @@ Recognized commands:
   platform <plat>	Builds the image for <plat> with Erlang & JS support.
   platform-all		Builds all images with Erlang and JS support.
 
-  platform-upload	Uploads the couchdbdev/* images to Docker Hub.
+  platform-upload	Uploads the laglinaro/* images to Docker Hub.
 			Requires appropriate credentials.
-  platform-upload-all	Uploads all the couchdbdev/* images to Docker Hub.
+  platform-upload-all	Uploads all the laglinaro/* images to Docker Hub.
 
   couch <plat>		Builds and tests CouchDB for <plat>.
   couch-all		Builds and tests CouchDB on all platforms.
