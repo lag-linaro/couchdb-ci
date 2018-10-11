@@ -32,4 +32,7 @@ echo $(whoami)
 echo $(pwd)
 
 ./configure --with-curl
+mv bin/rebar bin/rebar-orig
+wget https://github.com/rebar/rebar/wiki/rebar -O bin/rebar
+chmod +x bin/rebar
 make check
