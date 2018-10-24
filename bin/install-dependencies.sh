@@ -33,10 +33,6 @@ NODEVERSION=${NODEVERSION:-8}
 # Erlang 19.3.6 as of 2018-05-08
 ERLANGVERSION=${ERLANGVERSION:-19.3.6}
 
-# This works if we're not called through a symlink
-# otherwise, see https://stackoverflow.com/questions/59895/
-SCRIPTPATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-
 # install JS by default, unless told otherwise (make-js images)
 if [[ $1 == "nojs" ]]; then
   JSINSTALL="nojs"
@@ -57,6 +53,11 @@ fi
 
 # TODO: help info on -h
 
+# This works if we're not called through a symlink
+# otherwise, see https://stackoverflow.com/questions/59895/
+export SCRIPTPATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+. ${SCRIPTPATH}/detect-arch.sh
 . ${SCRIPTPATH}/detect-os.sh
 
 case "${OSTYPE}" in

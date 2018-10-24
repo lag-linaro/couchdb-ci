@@ -41,8 +41,12 @@ VERSION=$(/usr/bin/lsb_release -cs)
 
 apt-get update
 
+arms='(armhf|aarch64)'
+
 if [[ ${ERLANGVERSION} == "default" ]]; then
   apt-get update && apt-get install -y erlang-nox erlang-dev erlang erlang-eunit erlang-dialyzer
+elif [[ $ARCH =~ $arms ]]; then
+    ${SCRIPTPATH}/source-erlang.sh
 else
   wget https://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb
   dpkg -i erlang-solutions_1.0_all.deb
