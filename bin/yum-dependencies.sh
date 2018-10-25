@@ -34,8 +34,8 @@ if [[ ${EUID} -ne 0 ]]; then
   exit 1
 fi
 
+. ${SCRIPTPATH}/detect-arch.sh >/dev/null
 . ${SCRIPTPATH}/detect-os.sh >/dev/null
-ARCH=$(arch)
 echo "Detected RedHat/Centos/Fedora version: ${VERSION_ID}   arch: ${ARCH}"
 
 # TODO: Do the Right Things(tm) for Fedora

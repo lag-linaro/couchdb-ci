@@ -36,12 +36,13 @@ if [[ ${EUID} -ne 0 ]]; then
   exit 1
 fi
 
+. ${SCRIPTPATH}/detect-arch.sh >/dev/null
+
 # install lsb-release
 apt-get update && apt-get install -y lsb-release
 
 SCRIPTPATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 VERSION=$(/usr/bin/lsb_release -cs)
-ARCH=$(arch)
 debians='(wheezy|jessie|stretch|buster)'
 ubuntus='(precise|trusty|xenial|artful|bionic)'
 echo "Detected Ubuntu/Debian version: ${VERSION}   arch: ${ARCH}"
