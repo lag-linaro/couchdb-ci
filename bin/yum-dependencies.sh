@@ -34,8 +34,6 @@ if [[ ${EUID} -ne 0 ]]; then
   exit 1
 fi
 
-SCRIPTPATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-
 . ${SCRIPTPATH}/detect-os.sh >/dev/null
 ARCH=$(arch)
 echo "Detected RedHat/Centos/Fedora version: ${VERSION_ID}   arch: ${ARCH}"
