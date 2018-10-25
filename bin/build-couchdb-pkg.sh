@@ -40,10 +40,12 @@ if [[ $1 ]]; then
   cp ${SCRIPTPATH}/../$1 couchdb
 else
   # use master branch
-  git clone https://github.com/lag-linaro/couchdb.git
+  git clone https://github.com/apache/couchdb
   cd couchdb
-  git checkout origin/use-upstream-rebar -b use-upstream-rebar
   ./configure -c
+  mv bin/rebar bin/rebar-orig
+  wget https://github.com/rebar/rebar/wiki/rebar -O bin/rebar
+  chmod +x bin/rebar
   make dist
   cd ..
 fi
